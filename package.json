@@ -1,7 +1,7 @@
 {
-  "name": "ai-overlay-app",
+  "name": "scientific-calculator",
   "version": "1.0.0",
-  "description": "AI-powered screenshot overlay application",
+  "description": "Scientific Calculator",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
@@ -19,7 +19,7 @@
   "license": "MIT",
   "build": {
     "appId": "com.aioverlay.app",
-    "productName": "AI Screenshot Assistant",
+    "productName": "Scientific Calculator",
     "directories": {
       "output": "dist"
     },
@@ -57,7 +57,7 @@
       "createStartMenuShortcut": true
     },
     "portable": {
-      "artifactName": "AI-Screenshot-Assistant-Portable.exe"
+      "artifactName": "Scientific-Calculator.exe"
     }
   },
   "devDependencies": {
