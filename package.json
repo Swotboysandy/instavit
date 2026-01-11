@@ -1,0 +1,68 @@
+{
+  "name": "ai-overlay-app",
+  "version": "1.0.0",
+  "description": "AI-powered screenshot overlay application",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder",
+    "build:win": "electron-builder --win",
+    "build:portable": "electron-builder --win portable"
+  },
+  "keywords": [
+    "overlay",
+    "screenshot",
+    "ai",
+    "groq"
+  ],
+  "author": "",
+  "license": "MIT",
+  "build": {
+    "appId": "com.aioverlay.app",
+    "productName": "AI Screenshot Assistant",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "**/*",
+      "!dist/*",
+      "!dist_trash/*",
+      "!dist_trash_2/*",
+      "!dist_trash_huge/*"
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "icon": "build/icon.png"
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    },
+    "portable": {
+      "artifactName": "AI-Screenshot-Assistant-Portable.exe"
+    }
+  },
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.13.3"
+  },
+  "dependencies": {
+    "axios": "^1.6.2",
+    "electron-store": "^8.1.0"
+  }
+}
