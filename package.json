@@ -24,11 +24,14 @@
       "output": "dist"
     },
     "files": [
-      "**/*",
-      "!dist/*",
-      "!dist_trash/*",
-      "!dist_trash_2/*",
-      "!dist_trash_huge/*"
+      "main.js",
+      "renderer.js",
+      "ai-service.js",
+      "index.html",
+      "styles.css",
+      "package.json",
+      "node_modules/**/*",
+      "build/**/*"
     ],
     "win": {
       "target": [
