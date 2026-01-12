@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Figure 1.1</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <!-- Minimized View (Icon) -->
+    <div id="minimized-view" class="minimized-view">
+        <button class="icon-button" title=".">
+            <!-- Looks like a bullet point or small node -->
+            <span>&bull;</span>
+        </button>
+    </div>
+
+    <!-- Expanded View -->
+    <div id="expanded-view" class="expanded-view hidden">
+        <!-- Header: Looks like a formula or caption -->
+        <div class="header">
+            <div class="header-title">
+                <h1>f(x)</h1>
+            </div>
+            <div class="header-controls">
+                <!-- Auto-analyze: Summation -->
+                <button id="auto-analyze-btn" class="icon-btn" title=".">
+                    <span>&Sigma;</span>
+                </button>
+                <button id="expand-btn" class="hidden"></button>
+
+                <!-- Minimize: Minus -->
+                <button id="minimize-btn" class="icon-btn" title="Minimize">
+                    <span>[&minus;]</span>
+                </button>
+
+                <!-- Close: Variable x -->
+                <button id="close-btn" class="icon-btn close-btn" title="Close">
+                    <span>[x]</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Screenshot Preview Area -->
+        <div id="screenshot-container" class="screenshot-container hidden">
+            <img id="screenshot-preview" src="" alt="">
+            <button id="clear-screenshot" class="clear-screenshot" title=".">
+                <span>x</span>
+            </button>
+        </div>
+
+        <!-- Chat Area -->
+        <div id="chat-container" class="chat-container">
+            <!-- Empty initially -->
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <span>Processing</span>
+        </div>
+
+        <!-- Input Area (Looks like equation entry) -->
+        <div class="input-area">
+            <button id="screenshot-btn" class="screenshot-btn" title=".">
+                <!-- Looks like a plus or variable -->
+                <span>+</span>
+            </button>
+            <input type="text" id="query-input" placeholder="">
+            <button id="send-btn" class="send-btn">
+                <!-- Looks like implies arrow -->
+                <span>&rarr;</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+
+</html>

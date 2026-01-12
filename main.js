@@ -1,3 +1,4 @@
+require('dotenv').config();
 const { app, BrowserWindow, ipcMain, screen, desktopCapturer, globalShortcut } = require('electron');
 const path = require('path');
 const Store = require('electron-store');
@@ -40,7 +41,7 @@ function createWindow() {
     }
   });
 
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('app.html');
   mainWindow.setIgnoreMouseEvents(false);
   
   // Keep window always on top
@@ -198,8 +199,31 @@ app.whenReady().then(() => {
     }
   });
 
-  // 2. PASSIVE MODE: No auto-fight loop to prevent click blocking.
-  // Use Alt+S if the window gets hidden!
+  // 2. DEFENSE MODE (War Mode): Alt+D
+  // Toggles an aggressive 500ms loop to fight SEB
+  let defenseInterval = null;
+  
+  globalShortcut.register('Alt+D', () => {
+    if (defenseInterval) {
+      // Turn OFF
+      clearInterval(defenseInterval);
+      defenseInterval = null;
+      // Show checkmark or something? Just beep via main process log
+      console.log('Defense Mode: OFF');
+    } else {
+      // Turn ON
+      console.log('Defense Mode: ON');
+      // Force top every 500ms
+      defenseInterval = setInterval(() => {
+        if (mainWindow && !mainWindow.isDestroyed()) {
+          mainWindow.show();
+          mainWindow.setAlwaysOnTop(true, 'screen-saver', 1);
+          mainWindow.moveTop();
+          // We do NOT steal focus here preventing typing, just visual force
+        }
+      }, 500); 
+    }
+  });
 
   app.on('activate', () => {
     if (BrowserWindow.getAllWindows().length === 0) {

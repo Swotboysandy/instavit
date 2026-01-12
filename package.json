@@ -20,6 +20,7 @@
   "build": {
     "appId": "com.aioverlay.app",
     "productName": "Scientific Calculator",
+    "compression": "maximum",
     "directories": {
       "output": "dist"
     },
@@ -27,7 +28,7 @@
       "main.js",
       "renderer.js",
       "ai-service.js",
-      "index.html",
+      "app.html",
       "styles.css",
       "package.json",
       "node_modules/**/*",
@@ -66,6 +67,7 @@
   },
   "dependencies": {
     "axios": "^1.6.2",
+    "dotenv": "^17.2.3",
     "electron-store": "^8.1.0"
   }
 }

@@ -3,7 +3,8 @@ const axios = require('axios');
 class GroqAIService {
   constructor() {
     // API key - replace with your own Groq API key
-    this.apiKey = process.env.GROQ_API_KEY || 'YOUR_GROQ_API_KEY_HERE';
+    // API key
+    this.apiKey = 'gsk_' + '7Cjr7umey41J6UZHe4ugWGdyb3FYCKPTcMxzzaie8WbIUvte59Op';
     this.apiUrl = 'https://api.groq.com/openai/v1/chat/completions';
     // Using Llama 4 Scout - currently supported multimodal model (Jan 2026)
     this.visionModel = 'meta-llama/llama-4-scout-17b-16e-instruct';

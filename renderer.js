@@ -97,16 +97,11 @@ screenshotBtn.addEventListener('click', async () => {
     
     currentScreenshot = screenshot;
     
-    // Display screenshot
-    screenshotPreview.src = screenshot;
-    screenshotPreview.onerror = () => {
-      console.error('Failed to load screenshot image');
-      addMessage('ai', '❌ Failed to display screenshot. Please try again.');
-      currentScreenshot = null;
-      screenshotContainer.classList.add('hidden');
-    };
-    
-    screenshotContainer.classList.remove('hidden');
+    // Display screenshot - HIDDEN AS REQUESTED
+    // screenshotPreview.src = screenshot;
+    currentScreenshot = screenshot;
+    // Don't show the container
+    // screenshotContainer.classList.remove('hidden');
     
     // Enable input
     queryInput.disabled = false;
@@ -118,7 +113,7 @@ screenshotBtn.addEventListener('click', async () => {
       welcomeMsg.remove();
     }
     
-    addMessage('ai', '📸 Screenshot captured!');
+    addMessage('ai', 'Capture processed.'); 
     
     // Auto-analyze if enabled
     if (autoAnalyze) {
@@ -132,7 +127,7 @@ screenshotBtn.addEventListener('click', async () => {
     
   } catch (error) {
     console.error('Screenshot error:', error);
-    addMessage('ai', `❌ Failed to capture screenshot: ${error.message}`);
+    addMessage('ai', `Error: ${error.message}`);
   } finally {
     isProcessing = false;
     screenshotBtn.disabled = false;
@@ -146,32 +141,21 @@ async function analyzeScreenshotAuto() {
   
   try {
     isProcessing = true;
-    queryInput.disabled = true;
-    sendBtn.disabled = true;
+    // queryInput.disabled = true; // REMOVED
+    // sendBtn.disabled = true;    // REMOVED
     loading.classList.remove('hidden');
     
     // Professional, intelligent prompt for auto-analysis
-    const intelligentPrompt = `Analyze this screenshot professionally and intelligently:
+    const intelligentPrompt = `Analyze this screenshot professionally:
 
-1. First, identify what type of content this is (code, error message, UI/interface, document, MCQ question, diagram, etc.)
+1. Identify content type (MCQ, code, text, etc.)
 
-2. Based on the content type, provide the most relevant and actionable information:
-   - If it's a MULTIPLE CHOICE QUESTION (MCQ):
-     * Clearly state: "ANSWER: [Option Letter]" at the very beginning
-     * Then provide a brief, clear explanation of WHY that's the correct answer
-     * Keep it concise and focused on the key concept
-   
-   - If it's CODE: Identify the language, explain what it does, and note any issues or improvements
-   - If it's an ERROR: Explain what the error means and suggest how to fix it
-   - If it's a UI/INTERFACE: Describe the main functionality and purpose
-   - If it's a DOCUMENT/TEXT: Summarize the key points concisely
-   - If it's a QUESTION: Provide a direct, professional answer
-   - If it's a DIAGRAM/CHART: Explain what it represents and key insights
+2. Provide the answer/explanation directly.
+   - For MCQs: Start with "ANSWER: [Letter]" then explain briefly.
+   - For Questions: Answer directly.
 
-3. Be concise, professional, and focus on what matters most.
-4. Use simple formatting - avoid excessive markdown.
-
-Provide your analysis in a clear, structured format.`;
+3. IMPORTANT: Do NOT use emojis, special icons, or markdown formatting like bold/italics unless necessary. Keep it plain text.
+4. Be concise.`;
     
     const response = await ipcRenderer.invoke('analyze-screenshot', {
       image: currentScreenshot,
@@ -181,13 +165,13 @@ Provide your analysis in a clear, structured format.`;
     if (response) {
       addMessage('ai', response);
     } else {
-      addMessage('ai', '❌ No response from AI. Please try again.');
+      addMessage('ai', 'No response from AI. Please try again.');
     }
     
   } catch (error) {
     console.error('Auto-analyze error:', error);
     const errorMessage = error.message || 'Unknown error occurred';
-    addMessage('ai', `❌ Error: ${errorMessage}`);
+    addMessage('ai', `Error: ${errorMessage}`);
   } finally {
     isProcessing = false;
     loading.classList.add('hidden');
@@ -204,9 +188,9 @@ clearScreenshotBtn.addEventListener('click', () => {
   currentScreenshot = null;
   screenshotContainer.classList.add('hidden');
   screenshotPreview.src = '';
-  queryInput.value = '';
-  queryInput.disabled = true;
-  sendBtn.disabled = true;
+  // queryInput.value = '';  // Optional: keep query or clear it? User didn't ask to clear it, but it makes sense.
+  // queryInput.disabled = false; // KEEP ENABLED
+  // sendBtn.disabled = false;    // KEEP ENABLED
 });
 
 // Send query
@@ -237,8 +221,8 @@ async function sendQuery() {
     
     // Clear input
     queryInput.value = '';
-    queryInput.disabled = true;
-    sendBtn.disabled = true;
+    // queryInput.disabled = true; // REMOVED
+    // sendBtn.disabled = true;    // REMOVED
     
     // Show loading
     loading.classList.remove('hidden');
@@ -260,13 +244,13 @@ async function sendQuery() {
     if (response) {
       addMessage('ai', response);
     } else {
-      addMessage('ai', '❌ No response from AI. Please try again.');
+      addMessage('ai', 'No response from AI. Please try again.');
     }
     
   } catch (error) {
     console.error('Query error:', error);
     const errorMessage = error.message || 'Unknown error occurred';
-    addMessage('ai', `❌ Error: ${errorMessage}`);
+    addMessage('ai', `Error: ${errorMessage}`);
   } finally {
     isProcessing = false;
     loading.classList.add('hidden');
