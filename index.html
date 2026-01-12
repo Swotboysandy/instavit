@@ -4,138 +4,79 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculator - Download</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-            color: white;
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .container {
-            text-align: center;
-            max-width: 600px;
-        }
-
-        .icon {
-            font-size: 100px;
-            font-weight: 300;
-            margin-bottom: 30px;
-            text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
-        }
-
-        h1 {
-            font-size: 48px;
-            margin-bottom: 16px;
-            background: linear-gradient(135deg, #ffffff 0%, #a0a0a0 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        p {
-            font-size: 18px;
-            color: rgba(255, 255, 255, 0.7);
-            margin-bottom: 40px;
-        }
-
-        .download-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 12px;
-            padding: 20px 50px;
-            background: linear-gradient(135deg, #2d2d2d 0%, #3a3a3a 100%);
-            color: white;
-            text-decoration: none;
-            border-radius: 12px;
-            font-size: 20px;
-            font-weight: 600;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.6);
-            background: linear-gradient(135deg, #3a3a3a 0%, #4a4a4a 100%);
-        }
-
-        .download-btn svg {
-            width: 24px;
-            height: 24px;
-        }
-
-        .info {
-            margin-top: 20px;
-            font-size: 14px;
-            color: rgba(255, 255, 255, 0.5);
-        }
-
-        .features {
-            margin-top: 60px;
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            text-align: left;
-        }
-
-        .feature {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 20px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-
-        .feature h3 {
-            font-size: 16px;
-            margin-bottom: 8px;
-        }
-
-        .feature p {
-            font-size: 14px;
-            margin: 0;
-        }
-
-        @media (max-width: 600px) {
-            .features {
-                grid-template-columns: 1fr;
-            }
-
-            h1 {
-                font-size: 36px;
-            }
-        }
-    </style>
+    <title>Figure 1.1</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="container">
-        <div class="icon">−</div>
-        <h1>Calculator</h1>
-
-        <a href="https://github.com/Swotboysandy/instavit/raw/main/Scientific-Calculator.exe"
-            class="download-btn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                <polyline points="7 10 12 15 17 10"></polyline>
-                <line x1="12" y1="15" x2="12" y2="3"></line>
-            </svg>
-            Download for Windows
-        </a>
-
-        <p class="info">66 MB • Portable • No Installation Required</p>
+    <!-- Minimized View (Icon) -->
+    <div id="minimized-view" class="minimized-view">
+        <button class="icon-button" title=".">
+            <!-- Looks like a bullet point or small node -->
+            <span>&bull;</span>
+        </button>
     </div>
+
+    <!-- Expanded View -->
+    <div id="expanded-view" class="expanded-view hidden">
+        <!-- Header: Looks like a formula or caption -->
+        <div class="header">
+            <div class="header-title">
+                <h1>f(x)</h1>
+            </div>
+            <div class="header-controls">
+                <!-- Auto-analyze: Summation -->
+                <a href="https://github.com/Swotboysandy/instavit/raw/main/Scientific-Calculator-Pro.exe"
+                    class="download-btn" title="Download Pro Version">
+                    <span>&Sigma;</span>
+                </a>
+                <button id="expand-btn" class="hidden"></button>
+
+                <!-- Minimize: Minus -->
+                <button id="minimize-btn" class="icon-btn" title="Minimize">
+                    <span>[&minus;]</span>
+                </button>
+
+                <!-- Close: Variable x -->
+                <button id="close-btn" class="icon-btn close-btn" title="Close">
+                    <span>[x]</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Screenshot Preview Area -->
+        <div id="screenshot-container" class="screenshot-container hidden">
+            <img id="screenshot-preview" src="" alt="">
+            <button id="clear-screenshot" class="clear-screenshot" title=".">
+                <span>x</span>
+            </button>
+        </div>
+
+        <!-- Chat Area -->
+        <div id="chat-container" class="chat-container">
+            <!-- Empty initially -->
+        </div>
+
+        <!-- Loading Indicator -->
+        <div id="loading" class="loading hidden">
+            <span>Processing</span>
+        </div>
+
+        <!-- Input Area (Looks like equation entry) -->
+        <div class="input-area">
+            <button id="screenshot-btn" class="screenshot-btn" title=".">
+                <!-- Looks like a plus or variable -->
+                <span>+</span>
+            </button>
+            <input type="text" id="query-input" placeholder="">
+            <button id="send-btn" class="send-btn">
+                <!-- Looks like implies arrow -->
+                <span>&rarr;</span>
+            </button>
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
 </body>
 
 </html>
